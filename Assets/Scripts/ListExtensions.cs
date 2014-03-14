@@ -5,16 +5,16 @@ using System.Collections.Generic;
 public static class ListExtensions
 {
 
+		// Extension method to shuffle a list 
 		public static void Shuffle<T> (this IList<T> list)
 		{  
-				  
-				int n = list.Count;  
-				while (n > 1) {  
-						n--;  
-						int k = Random.Range (0, n + 1);  
-						T value = list [k];  
-						list [k] = list [n];  
-						list [n] = value;  
+				int i = list.Count;  
+				while (i > 1) {  
+						i--;  
+						int j = Random.Range (0, i + 1);  
+						T value = list [j];  
+						list [j] = list [i];  
+						list [i] = value;  
 				}  
 		}
 }
