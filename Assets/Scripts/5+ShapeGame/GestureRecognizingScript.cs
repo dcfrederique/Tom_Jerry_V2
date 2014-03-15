@@ -26,6 +26,7 @@ public class GestureRecognizingScript : MonoBehaviour
 				}			
 				linePoints = new Vector2[maxPoints];
 				line = new VectorLine ("DrawnLine", linePoints, lineMaterial, lineWidth, LineType.Continuous, Joins.Weld);
+				//line.collision = true;
 				sqrMinPixelMove = minPixelMove * minPixelMove;
 		}
 		void OnCustomGesture (PointCloudGesture gesture)

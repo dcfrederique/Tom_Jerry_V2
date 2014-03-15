@@ -16,7 +16,7 @@ public class BtnShapesEventHandlerScript : MonoBehaviour
 		//ButtonDown ...
 		void ButtonDown ()
 		{
-				Debug.Log ("Button Down");
+				//Debug.Log ("Button Down");
 		}
 		//Loading specific scen
 		void Clicked (tk2dUIItem clickedUIItem)
