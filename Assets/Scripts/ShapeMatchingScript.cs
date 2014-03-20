@@ -6,6 +6,8 @@ public class ShapeMatchingScript : MonoBehaviour
 		
 		private Vector3 startPos;
 		private int correctScore = 0;
+		private bool returnToPos;
+		private float speed = 11f;
 		void Start ()
 		{
 				startPos = transform.position;
@@ -14,6 +16,8 @@ public class ShapeMatchingScript : MonoBehaviour
 		void OnTriggerEnter (Collider colliderinfo)
 		{
 				if (colliderinfo.name.LastIndexOf (gameObject.name.Split ('(') [0]) != -1) {
+						returnToPos = false;
+						SoundEffectsHelper.Instance.MakeCorrectAnswerSound ();
 						Destroy (gameObject.GetComponent ("tk2dUIDragItem"));
 						Destroy (gameObject.collider);
 						Destroy (colliderinfo.gameObject);
@@ -25,9 +29,19 @@ public class ShapeMatchingScript : MonoBehaviour
 						PlayerPrefs.SetInt ("correctScore", correctScore);
 
 				} else if (colliderinfo.name.IndexOf ("Answer") != -1) {
+						SoundEffectsHelper.Instance.MakeWrongAnswerSound ();
 						GetComponent<tk2dUIDragItem> ().enabled = false;
-						transform.position = startPos;
+						returnToPos = true;
 						GetComponent<tk2dUIDragItem> ().enabled = true;
+				}
+		}
+		void Update ()
+		{
+				if (returnToPos) {
+						transform.position = Vector3.MoveTowards (transform.position, startPos, speed * Time.deltaTime);
+				} 
+				if (transform.position == startPos) {
+						returnToPos = false;
 				}
 		}
 }
